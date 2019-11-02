@@ -21,11 +21,9 @@ module.exports = async function (text) {
       .contain(TEMPLATE_WIDTH, TEMPLATE_HEIGHT + getTextHeight(font, text))
       .print(font, 10, 5, getText(text), MAX_TEXT_WIDTH)
       .write(OUTPUT)
-
-    return 'OK'
   } catch(e) {
     console.error(e)
-    return 'VOE PASKA!'
+    throw e
   }
 }
 

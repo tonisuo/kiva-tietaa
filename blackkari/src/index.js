@@ -33,8 +33,12 @@ app.get('/getImage', (req, res) => {
 })
 
 app.get('/generateImage', async (req, res) => {
-    const response = await generateImage('Puskin juuri masteriin.')
-    res.send(response)
+    try {
+        await generateImage('Puskin juuri masteriin.')
+        res.send('OK!')
+    } catch (e) {
+        res.status(400).send('VOE PASKA')
+    }
 })
 
 app.listen(port, () => {
