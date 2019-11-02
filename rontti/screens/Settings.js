@@ -5,12 +5,6 @@ import * as Permissions from 'expo-permissions';
 
 export default class SettingsScreen extends Component {
 
-  /*
-  state = {
-    notification: {},
-  };
-   */
-
   askPermissions = async () => {
     const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
     let finalStatus = existingStatus;

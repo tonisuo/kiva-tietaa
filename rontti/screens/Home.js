@@ -1,51 +1,56 @@
 import React, { Component } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, Image, StyleSheet, Text, View } from 'react-native';
+import { withNavigationFocus } from 'react-navigation';
 
 const ip = "192.168.43.65";
+const app_key = "asdasdasd";
+const url = `http://${ip}:3000/`;
+const auth = `?appKey=${app_key}`;
+const status_url = `${url}hasNotifications${auth}`;
+const img_url = `${url}generateImage${auth}`;
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
 
   state = {
-    displayNotification: false
+    displayImage: false
   };
 
   componentDidMount() {
-    // try to fetch info about notification
-    // {notification: true}
-    // if it returns true, try to fetch the image
-    //getNotifications()
     this.handleDisplaying()
   }
 
-  handleDisplaying = () => {
-    /*const status = getNotifications();
-    if (status.notifications) {
-      console.log("notification available")
-    } else {
-      console.log("it's not 3 am!");
-    }*/
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.isFocused !== this.props.isFocused) {
+      this.handleDisplaying()
+    }
+  }
 
-    fetch(`http://${ip}:3000/hasNotifications?appKey=asdasdasd`)
+  handleDisplaying = () => {
+    console.log("handling displaying");
+
+    fetch(status_url)
       .then(response => response.json())
       .then(data => {
         if (data.notifications) {
-          console.log("it is 3 am!");
-          this.setState({displayNotification: true})
+          this.setState({displayImage: true})
         } else {
-          console.log("not 3 am");
+          this.setState({displayImage: false})
         }
       })
       .catch(error => console.log(error));
   };
 
   render() {
-    const { displayNotification } = this.state;
+    const { displayImage } = this.state;
 
     return (
       <View style={styles.container}>
-        {displayNotification ?
-          (<Text>Kello on kolme!</Text>) :
-          (<Text>Kello ei ole kolme aamuyöstä</Text>)}
+        {displayImage ?
+          (<Image
+            style={styles.image}
+            source={{uri: `${img_url}&timestamp=${new Date().getTime()}`}}
+          />) :
+          (<Text>Kello ei ole kolme aamuyöstä, yritä myöhemmin uudelleen.</Text>)}
         <Button
           title={"Asetukset"}
           onPress={() => this.props.navigation.navigate('Settings')}
@@ -62,4 +67,11 @@ const styles = StyleSheet.create({
     //alignItems: 'center', // this breaks button texts for some reason
     justifyContent: 'center',
   },
+  image: {
+    flex: 1,
+    height: 100,
+    width: null
+  }
 });
+
+export default withNavigationFocus(HomeScreen);
