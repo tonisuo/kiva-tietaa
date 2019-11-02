@@ -34,8 +34,12 @@ app.get('/getImage', (req, res) => {
 
 app.get('/generateImage', async (req, res) => {
     try {
-        const base64jpeg = await generateImage('Puskin juuri masteriin.')
-        res.send('OK!')
+      const base64jpeg2 = await generateImage('Puskin juuri masteriin hiuhihihhi asdash.')
+
+      let buff = Buffer.from(base64jpeg2.split(',')[1], 'base64');
+
+      res.set('Content-Type', 'image/jpeg')
+      res.send(buff)
     } catch (e) {
         console.error(e)
         res.status(400).send('VOE PASKA')
