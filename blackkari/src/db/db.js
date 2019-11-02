@@ -13,11 +13,11 @@ function mongoDb() {
     });
 }
 
-mongoDb.prototype.save = function save(fact) {
+mongoDb.prototype.save = function save(fact, imgBase64) {
     db.connect(url, function(err, db) {
         if (err) throw err
         const dbo = db.db("mydb")
-        let factObj = { date: new Date(), fact: fact}
+        let factObj = { date: new Date(), fact: fact, image: imgBase64}
         dbo.collection("facts").insertOne(factObj, function(err, res) {
             if(err) {
                 console.log("Error inserting object")
