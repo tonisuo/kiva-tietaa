@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/tonisuo/kiva-tietaa/issues"
   },
-  "homepage": "https://github.com/tonisuo/kiva-tietaa#readme"
+  "homepage": "https://github.com/tonisuo/kiva-tietaa#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
