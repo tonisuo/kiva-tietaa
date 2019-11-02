@@ -1,25 +1,23 @@
 const express = require('express')
 const schedule = require('node-schedule')
 const facts = require('./facts/factService')
+const clockService = require('./clock/clockService')
 const path = require('path')
 const fs = require('fs')
 const app = express()
 const port = 3000
 
-const THREE = 3
-
-const isThreeOClock = () =>
-  new Date().getHours() === THREE
+const clock = new clockService()
 
 app.get('/ping', (req, res) => res.send('Hello World!'))
 
-app.get('/hasNotifications', (req, res) => res.send({notifications: isThreeOClock()}))
+app.get('/hasNotifications', (req, res) => res.send({notifications: clock.isThreeOClock()}))
 
 app.get('/getImage', (req, res) => {
   const file = path.join(__dirname, "../resources/test-image.jpg")
   const s = fs.createReadStream(file)
 
-  if (!isThreeOClock()) {
+  if (!clock.isThreeOClock()) {
     return res.status(403).end("It is not three o'clock!")
   }
 
