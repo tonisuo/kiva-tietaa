@@ -1,10 +1,10 @@
+const config = require('../config.json')
+
 module.exports = function() {
     this.isThreeOClock = isThreeOClock
 }
 
-const THREE = 3
-
 const isThreeOClock = () =>
-    new Date().getHours() === THREE
+    new Date().getHours() === config.clock.notificationHour
 
 

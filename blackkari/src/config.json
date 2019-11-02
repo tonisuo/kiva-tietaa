@@ -1,0 +1,9 @@
+{
+  "clock": {
+    "notificationHour": 3
+  },
+  "auth": {
+    "enabled": true,
+    "appKey": "asdasdasd"
+  }
+}
