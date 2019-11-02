@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/tonisuo/kiva-tietaa.svg?token=5aLnZnpJEoXDMwxJmqMe&branch=master)](https://travis-ci.com/tonisuo/kiva-tietaa)
+
 # kiva-tietaa
 "Kiva tietää näin kolmesta aamyöstä" Hackfest project.
 
