@@ -1,6 +1,6 @@
 const express = require('express')
 const schedule = require('node-schedule')
-const facts = require('./facts/factFetcher')
+const facts = require('./facts/factService')
 const app = express()
 const port = 3000
 
