@@ -3,6 +3,7 @@ const schedule = require('node-schedule')
 const facts = require('./facts/factService')
 const clockService = require('./clock/clockService')
 const authService = require('./auth/authService')
+const generateImage = require('./image/generateImage')
 const path = require('path')
 const fs = require('fs')
 const app = express()
@@ -31,11 +32,21 @@ app.get('/getImage', (req, res) => {
   })
 })
 
+app.get('/generateImage', async (req, res) => {
+    try {
+        const base64jpeg = await generateImage('Puskin juuri masteriin.')
+        res.send('OK!')
+    } catch (e) {
+        console.error(e)
+        res.status(400).send('VOE PASKA')
+    }
+})
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}!`)
-    //const daily = new facts()
-    //daily.dailyFact()
-    const scheduling = schedule.scheduleJob('* * * * *', function(){
+    const daily = new facts()
+    daily.dailyFact()
+    const scheduling = schedule.scheduleJob('* * * * *  ', function(){
         console.log('The answer to life, the universe, and everything!')
 
     })
