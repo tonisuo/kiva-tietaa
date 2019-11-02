@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.com/tonisuo/kiva-tietaa.svg?token=5aLnZnpJEoXDMwxJmqMe&branch=master)](https://travis-ci.com/tonisuo/kiva-tietaa)
 
+![alt text](doc/ngace.png "Logo Title Text 1")
+
 # kiva-tietaa
 "Kiva tietää näin kolmesta aamyöstä" Hackfest project. Sends a push-notification to mobile app at 3am (timezone Helsinki/Finland) with a vital random fact inserted to a Donald Duck meme.
 
