@@ -6,13 +6,24 @@ const authService = require('./auth/authService')
 const generateImage = require('./image/generateImage')
 const path = require('path')
 const fs = require('fs')
+const db = require('./db/db.js')
 const app = express()
 const port = 3000
 
 const clock = new clockService()
 const auth = new authService()
+const dbInstance = new db()
 
 app.get('/ping', (req, res) => res.send('Hello World!'))
+
+app.get('/test', (req, res) => {
+  dbInstance.fetchImage(result => {
+    let buff = Buffer.from(result.image.split(',')[1], 'base64');
+
+    res.set('Content-Type', 'image/jpeg')
+    res.send(buff)
+  })
+})
 
 app.use(auth.authenticate)
 
@@ -48,8 +59,8 @@ app.get('/generateImage', async (req, res) => {
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}!`)
-    const daily = new facts()
-    daily.dailyFact()
+    //const daily = new facts()
+    //daily.dailyFact()
     const scheduling = schedule.scheduleJob('* * * * *  ', function(){
         console.log('The answer to life, the universe, and everything!')
 

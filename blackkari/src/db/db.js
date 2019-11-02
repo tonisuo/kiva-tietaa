@@ -17,7 +17,9 @@ mongoDb.prototype.save = function save(factEn, factFi, imgBase64) {
     db.connect(url, function(err, db) {
         if (err) throw err
         const dbo = db.db("mydb")
-        let factObj = { date: new Date(), factEn: factEn, factFi: factFi, image: imgBase64}
+      const date = new Date()
+      date.setDate(1)
+        let factObj = { date: date, factEn: factEn, factFi: factFi, image: imgBase64}
         dbo.collection("facts").insertOne(factObj, function(err, res) {
             if(err) {
                 console.log("Error inserting object")
@@ -27,6 +29,22 @@ mongoDb.prototype.save = function save(factEn, factFi, imgBase64) {
             db.close()
         })
     })
+}
+
+mongoDb.prototype.fetchImage = function fetchImage(cb) {
+  db.connect(url, function(err, db) {
+    if (err) throw err
+    const dbo = db.db("mydb")
+    const startDate = new Date()
+    startDate.setHours(0)
+    const endDate = new Date()
+    endDate.setHours(23)
+    dbo.collection("facts").findOne({"date": {"$gte": startDate, "$lte": endDate}}, function(err, result) {
+      if (err) throw err;
+      db.close();
+      cb(result)
+    })
+  })
 }
 
 module.exports = mongoDb
