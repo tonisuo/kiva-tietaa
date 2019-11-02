@@ -1,0 +1,22 @@
+{
+  "name": "kiva-tietaa",
+  "version": "1.0.0",
+  "description": "Backend for kiva-tietaa app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tonisuo/kiva-tietaa.git"
+  },
+  "keywords": [
+    "ebin"
+  ],
+  "author": "Jarno&Kyösti&Toni&Heikki LLC.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tonisuo/kiva-tietaa/issues"
+  },
+  "homepage": "https://github.com/tonisuo/kiva-tietaa#readme"
+}
