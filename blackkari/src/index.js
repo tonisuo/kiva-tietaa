@@ -49,10 +49,9 @@ app.get('/generateImage', async (req, res) => {
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}!`)
-    //const daily = new facts()
-    //daily.dailyFact()
-    const scheduling = schedule.scheduleJob('* * * * *  ', function(){
+    const fact = new facts()
+    const scheduling = schedule.scheduleJob('* * * * *', function(){
         console.log('The answer to life, the universe, and everything!')
-
+        fact.dailyFact()
     })
 })
