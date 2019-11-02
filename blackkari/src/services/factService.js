@@ -13,7 +13,7 @@ function getDailyFact() {
     fetch('https://uselessfacts.jsph.pl/random.json?language=en')
         .then(response => response.json())
         .then(data => {
-            translationService(data.text)
+            translationService(data.text.trim())
                 .then(translation => {
                     console.log("Translation: " + translation)
                     imgGenerator(translation)
