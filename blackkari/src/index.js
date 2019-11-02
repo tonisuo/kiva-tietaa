@@ -1,6 +1,6 @@
 const express = require('express')
 const schedule = require('node-schedule')
-const facts = require('./facts/factService')
+const facts = require('./services/factService')
 const clockService = require('./clock/clockService')
 const authService = require('./auth/authService')
 const generateImage = require('./image/generateImage')

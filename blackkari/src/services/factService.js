@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const db = require('../db/db.js')
 const imgGenerator = require('../image/generateImage.js')
-const translationService = require('../services/translation.js')
+const translationService = require('./translation.js')
 
 module.exports = function() {
     this.dailyFact = getDailyFact
