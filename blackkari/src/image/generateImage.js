@@ -1,6 +1,8 @@
 const Jimp = require('jimp')
 const path = require('path')
 
+const FONT_TIMES_NEW_ROMAN_16 = path.join(__dirname, "../image/times_new_roman.fnt")
+
 const TEMPLATE = path.join(__dirname, "../image/kiva_template.jpg")
 const OUTPUT = path.join(__dirname, "../image/kiva_rendered.jpg")
 
@@ -15,7 +17,7 @@ const MAX_TEXT_WIDTH = TEMPLATE_WIDTH - 20
 module.exports = async function (text) {
   try {
     const img = await Jimp.read(TEMPLATE)
-    const font = await Jimp.loadFont(Jimp.FONT_SANS_14_BLACK)
+    const font = await Jimp.loadFont(FONT_TIMES_NEW_ROMAN_16)
     return img
       .background(0xffffffff)
       .contain(TEMPLATE_WIDTH, TEMPLATE_HEIGHT + getTextHeight(font, text))

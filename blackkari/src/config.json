@@ -5,5 +5,9 @@
   "auth": {
     "enabled": true,
     "appKey": "asdasdasd"
+  },
+  "translation": {
+    "key": "trnsl.1.1.20191102T082852Z.80f3e975bc40edbb.e31b722f19eef6acda3cf2f3567f3807689cd81c",
+    "languageDirection": "en-fi"
   }
 }
