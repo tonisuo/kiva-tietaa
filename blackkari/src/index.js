@@ -16,30 +16,20 @@ const dbInstance = new db()
 
 app.get('/ping', (req, res) => res.send('Hello World!'))
 
-app.get('/test', (req, res) => {
-  dbInstance.fetchImage(result => {
-    let buff = Buffer.from(result.image.split(',')[1], 'base64');
-
-    res.set('Content-Type', 'image/jpeg')
-    res.send(buff)
-  })
-})
-
 app.use(auth.authenticate)
 
 app.get('/hasNotifications', (req, res) => res.send({notifications: clock.isThreeOClock()}))
 
 app.get('/getImage', (req, res) => {
-  const file = path.join(__dirname, "../resources/test-image.jpg")
-  const s = fs.createReadStream(file)
-
   if (!clock.isThreeOClock()) {
     return res.status(403).end("It is not three o'clock!")
   }
 
-  s.on('open', function () {
+  dbInstance.fetchImage(result => {
+    let buff = Buffer.from(result.image.split(',')[1], 'base64');
+
     res.set('Content-Type', 'image/jpeg')
-    s.pipe(res)
+    res.send(buff)
   })
 })
 
