@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec \"npm start\" --watch src/"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongodb": "^3.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
   }
 }
