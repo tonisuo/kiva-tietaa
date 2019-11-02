@@ -8,7 +8,7 @@ const app_key = "asdasdasd";
 const url = `http://${ip}:3000/`;
 const auth = `?appKey=${app_key}`;
 const status_url = `${url}hasNotifications${auth}`;
-const img_url = `${url}generateImage${auth}`;
+const img_url = `${url}getImage${auth}`;
 
 class HomeScreen extends Component {
 
@@ -47,32 +47,44 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         {displayImage ?
-          (<FullWidthImage
-            //style={styles.image}
-            source={{uri: `${img_url}&timestamp=${new Date().getTime()}`}}
-          />) :
-          (<Text>Kello ei ole kolme aamuyöstä, yritä myöhemmin uudelleen.</Text>)}
-        <Button
-          title={"Asetukset"}
-          onPress={() => this.props.navigation.navigate('Settings')}
-        />
+        (<FullWidthImage
+          source={{uri: `${img_url}&timestamp=${new Date().getTime()}`}}
+        />) :
+        (<Text style={styles.text}>Kello ei ole kolme aamuyöstä, yritä myöhemmin uudelleen.</Text>)}
+        <View style={styles.buttonContainer}>
+          <Button
+            title={"Asetukset"}
+            onPress={() => this.props.navigation.navigate('Settings')}
+            style={styles.button}
+          />
+        </View>
       </View>
     );
   }
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    //alignItems: 'center', // this breaks button texts for some reason
-    justifyContent: 'center',
+    alignItems: 'center', // this breaks button texts for some reason
+    padding: 40,
+  },
+  buttonContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
   },
   image: {
-    //flex: 1,
     height: 300,
     width: 300,
+  },
+  text: {
+    fontSize: 20,
+    marginVertical: 60,
+    textAlign: 'center',
+  },
+  button: {
+    position: 'absolute'
   }
 });
 

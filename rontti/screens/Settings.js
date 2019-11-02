@@ -72,15 +72,21 @@ export default class SettingsScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Tästä voit tilata jokaöiset ilmoitukset</Text>
-        <Button
-          title={"Subscribe to nightly notification"}
-          onPress={() => this.subscribeToNotification()}
-        />
-        <Button
-          title={"Remove notifications"}
-          onPress={() => this.cancelNotifications()}
-        />
+        <Text style={styles.text}>Tästä voit tilata jokaöiset ilmoitukset</Text>
+        <View style={styles.button}>
+          <Button
+            style={styles.button}
+            title={"Tilaa ilmoitus"}
+            onPress={() => this.subscribeToNotification()}
+          />
+        </View>
+        <View style={styles.button}>
+          <Button
+            style={styles.button}
+            title={"Poista ilmoitukset"}
+            onPress={() => this.cancelNotifications()}
+          />
+        </View>
       </View>
     );
   }
@@ -92,5 +98,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     //alignItems: 'center', // this breaks button texts for some reason
     justifyContent: 'center',
+    padding: 40,
   },
+  text: {
+    fontSize: 20,
+    marginHorizontal: 30,
+    marginVertical: 60,
+    textAlign: 'center',
+  },
+  button: {
+    paddingBottom: 20,
+  }
 });
