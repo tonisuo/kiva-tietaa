@@ -30,7 +30,7 @@ module.exports = async function (text) {
   }
 }
 
-const getText = (text) => `Aku setä! ${text}`
+const getText = (text) => `Aku-setä! ${text}`
 
 function getTextHeight(font, text) {
   const height = Jimp.measureTextHeight(font, getText(text), MAX_TEXT_WIDTH)
