@@ -16,11 +16,12 @@ module.exports = async function (text) {
   try {
     const img = await Jimp.read(TEMPLATE)
     const font = await Jimp.loadFont(Jimp.FONT_SANS_14_BLACK)
-    img
+    return img
       .background(0xffffffff)
       .contain(TEMPLATE_WIDTH, TEMPLATE_HEIGHT + getTextHeight(font, text))
       .print(font, 10, 5, getText(text), MAX_TEXT_WIDTH)
       .write(OUTPUT)
+      .getBase64Async(Jimp.MIME_JPEG)
   } catch(e) {
     console.error(e)
     throw e
