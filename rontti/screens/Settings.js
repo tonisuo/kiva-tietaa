@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, Platform, StyleSheet, Text, View } from 'react-native';
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
 
@@ -21,35 +21,45 @@ export default class SettingsScreen extends Component {
     });
   };
 
-  sendNotificationImmediately = async () => {
-    const notificationId = await Notifications.presentLocalNotificationAsync({
-      title: 'Kiva tietää',
-      body: 'Paina tästä saadaksesi tietää totuuden',
-    });
-    console.log(notificationId); // can be saved in AsyncStorage or send to server
-  };
-
   cancelNotifications = async () => {
     const response = await Notifications.cancelAllScheduledNotificationsAsync();
     console.log(response);
   };
 
+  createAndroidChannel = async () => {
+    await Notifications.createChannelAndroidAsync("nightly-notification", {
+      name: 'Nightly notification',
+      sound: true,
+      vibrate: true,
+    })
+  };
+
   scheduleNotification = async () => {
     const date = new Date();
-    //const time = `${date.getHours()}.${date.getMinutes()}:${date.getSeconds()}`;
-    //const time = date.format("hh.mm:ss");
+    const threeAm = date.setHours(3, 0, 0, 0);
+
+    if (Platform.OS === "android") {
+      this.createAndroidChannel();
+    }
+
+    console.log("scheduling notifications");
+
     return Notifications.scheduleLocalNotificationAsync(
       {
         title: "Kiva tietää näin kolmelta aamuyöstä",
-        body: "Paina tästä oppiaksesi totuuden"
+        body: "Paina tästä oppiaksesi totuuden",
+        ios: { // (optional) (object) — notification configuration specific to iOS.
+          sound: true // (optional) (boolean) — if true, play a sound. Default: false.
+        },
+        android: { // (optional) (object) — notification configuration specific to Android.
+          channelId: "nightly-notification"
+        }
       },
       {
-        repeat: "minute",
-        time: date.getTime() + 10000
+        repeat: "day",
+        time: threeAm
       }
     );
-    //console.log(notificationId);
-    //return notificationId;
   };
 
   subscribeToNotification = () => {
@@ -64,15 +74,11 @@ export default class SettingsScreen extends Component {
       <View style={styles.container}>
         <Text>Tästä voit tilata jokaöiset ilmoitukset</Text>
         <Button
-          title={"Send notification"}
-          onPress={() => this.sendNotificationImmediately()}
-        />
-        <Button
           title={"Subscribe to nightly notification"}
           onPress={() => this.subscribeToNotification()}
         />
         <Button
-          title={"Remove all notifications"}
+          title={"Remove notifications"}
           onPress={() => this.cancelNotifications()}
         />
       </View>

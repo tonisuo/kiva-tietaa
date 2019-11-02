@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Image, StyleSheet, Text, View } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
+import FullWidthImage from 'react-native-fullwidth-image';
 
 const ip = "192.168.43.65";
 const app_key = "asdasdasd";
@@ -46,8 +47,8 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         {displayImage ?
-          (<Image
-            style={styles.image}
+          (<FullWidthImage
+            //style={styles.image}
             source={{uri: `${img_url}&timestamp=${new Date().getTime()}`}}
           />) :
           (<Text>Kello ei ole kolme aamuyöstä, yritä myöhemmin uudelleen.</Text>)}
@@ -60,6 +61,7 @@ class HomeScreen extends Component {
   }
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -68,9 +70,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    flex: 1,
-    height: 100,
-    width: null
+    //flex: 1,
+    height: 300,
+    width: 300,
   }
 });
 
