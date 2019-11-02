@@ -3,6 +3,7 @@ const schedule = require('node-schedule')
 const facts = require('./facts/factService')
 const clockService = require('./clock/clockService')
 const authService = require('./auth/authService')
+const generateImage = require('./image/generateImage')
 const path = require('path')
 const fs = require('fs')
 const app = express()
@@ -29,6 +30,11 @@ app.get('/getImage', (req, res) => {
     res.set('Content-Type', 'image/jpeg')
     s.pipe(res)
   })
+})
+
+app.get('/generateImage', async (req, res) => {
+    const response = await generateImage('Puskin juuri masteriin.')
+    res.send(response)
 })
 
 app.listen(port, () => {
