@@ -10,15 +10,3 @@ services:
 #      - ./data/db:/data/db
     ports:
       - 27017:27017
-
-#  app:
-#    restart: always
-#    build: ./blackkari
-#    working_dir: /blackkari
-#    volumes:
-#      - ./app:/app
-#    expose:
-#      - "8080"
-#    command: npm run dev
-#    depends_on:
-#      - mongodb
