@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const fetch = require('node-fetch')
 const db = require('../db/db.js')
 const imgGenerator = require('../image/generateImage.js')
 const translationService = require('./translation.js')
@@ -15,7 +15,6 @@ function getDailyFact() {
         .then(data => {
             translationService(data.text.trim())
                 .then(translation => {
-                    console.log("Translation: " + translation)
                     imgGenerator(translation)
                         .then(base64 => {
                             dbInstance.save(data.text, translation, base64)

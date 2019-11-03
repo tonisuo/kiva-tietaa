@@ -26,7 +26,7 @@ app.get('/getImage', (req, res) => {
   }
 
   dbInstance.fetchImage(result => {
-    let buff = Buffer.from(result.image.split(',')[1], 'base64');
+    let buff = Buffer.from(result.image.split(',')[1], 'base64')
 
     res.set('Content-Type', 'image/jpeg')
     res.send(buff)
@@ -37,7 +37,6 @@ app.listen(port, () => {
     console.log(`Example app listening on port ${port}!`)
     const fact = new facts()
     const scheduling = schedule.scheduleJob('* * * * *', function(){
-        console.log('The answer to life, the universe, and everything!')
         fact.dailyFact()
     })
 })
