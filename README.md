@@ -30,7 +30,7 @@ Start server:
 
 ```
 cd blackkari
-npm dev run
+npm run dev
 ```
 
 Ping server:
