@@ -4,7 +4,7 @@
   "description": "Backend for kiva-tietaa app",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node src/app.js",
     "test": "echo \"Tests successful\" && exit 0",
     "dev": "nodemon --exec \"npm start\" --watch src/"
   },

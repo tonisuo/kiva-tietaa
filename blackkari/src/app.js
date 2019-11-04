@@ -1,11 +1,8 @@
 const express = require('express')
 const schedule = require('node-schedule')
-const facts = require('./services/factService')
-const clockService = require('./services/clockService')
-const authService = require('./auth/authService')
-const generateImage = require('./image/generateImage')
-const path = require('path')
-const fs = require('fs')
+const facts = require('./services/facts')
+const clockService = require('./services/clock')
+const authService = require('./auth/auth')
 const db = require('./db/db.js')
 const app = express()
 const port = 3000
@@ -27,16 +24,14 @@ app.get('/getImage', (req, res) => {
 
   dbInstance.fetchImage(result => {
     let buff = Buffer.from(result.image.split(',')[1], 'base64')
-
     res.set('Content-Type', 'image/jpeg')
     res.send(buff)
   })
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}!`)
-    const fact = new facts()
-    const scheduling = schedule.scheduleJob('* * * * *', function(){
-        fact.dailyFact()
-    })
+  const fact = new facts()
+  const scheduling = schedule.scheduleJob('* * * * *', function () {
+    fact.dailyFact()
+  })
 })
