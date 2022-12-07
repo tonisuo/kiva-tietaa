@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/tonisuo/kiva-tietaa#readme",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "jimp": "^0.8.5",
     "mongodb": "^3.3.3",
     "node-fetch": "^2.6.0",
